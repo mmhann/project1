@@ -223,3 +223,30 @@ select:hover{
 .button-cancel {
     border-radius: 0 5px 5px 0;
 }
+
+
+
+
+.edit-note-importance ul {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+.edit-note-importance ul > li {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.edit-note-importance ul > li:hover{
+    color:white;
+}
+.edit-note-importance ul > li:hover:before,
+.edit-note-importance ul > li:hover ~ li:before {
+    content: "whatshot";
+    position: absolute;
+    color:red;
+}
+
+.edit-note-importance ul > li.checked {
+    color:black;
+}

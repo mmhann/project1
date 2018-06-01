@@ -1,0 +1,30 @@
+{
+  "name": "project1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmhann/project1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmhann/project1/issues"
+  },
+  "homepage": "https://github.com/mmhann/project1#readme",
+  "dependencies": {
+    "eslint-config-airbnb": "^16.1.0",
+    "handlebars": "^4.0.11",
+    "serve": "^6.5.7"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0"
+  }
+}
