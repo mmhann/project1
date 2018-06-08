@@ -1,5 +1,5 @@
 const serve = require('serve')
 
 const server = serve('src/', {
-  port: 3000
+  port: 3002
 })

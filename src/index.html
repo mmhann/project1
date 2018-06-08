@@ -5,124 +5,119 @@
     <title>Project 1</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/main.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/handlebars-v4.0.11.js"></script>
+
 </head>
 
 <body>
-    <script id="main-template" type="text/x-handlebars-template">
+
     <div class="grid-container">
-            <header>
-                <div class="create">
-                    <button class="create-button">{{noteButton}}</button>
-                </div>
-                <div class="change-style">
-                    <select class="change-style-select">
-                        {{#each changeStyleDropdown}}
-                            <option value={{value}}>{{name}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-
-            </header>
-
-            <main>
-                <nav>
-                    <div class="nav-list">
-                        {{#each navButtonList}}
-                            <button class="nav-button">{{name}}</button>
-                        {{/each}}
-                    </div>
-                    <div class="show-finished">
-                        <button>{{finishedButton}}</button>
-                    </div>
-                </nav>
-                <section>
-                    <div class="notes">
-                        <div class="note">
-                            <div class="note-date">Nächsten Mittwoch</div>
-                            <div class="note-title">CAS FEE Selbststudium / Projekt Aufgabe erledigen</div>
-                            <div class="note-importance">
-                                <i class="material-icons importance">whatshot</i>
-                                <i class="material-icons importance">whatshot</i>
-                                <i class="material-icons importance">whatshot</i>
-                                <i class="material-icons importance">whatshot</i>
-                                <i class="material-icons importance">whatshot</i>
-                            </div>
-                            <div class="note-finish-checkbox"><label><input type="checkbox" value="">Finished</label>
-                            </div>
-                            <div class="note-text">
-                                <textarea>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l</textarea>
-                            </div>
-                            <div class="note-edit">
-                                <button>Edit</button>
-                            </div>
-                        </div>
-                        <div class="note">
-                            <div class="note-date">Heute</div>
-                            <div class="note-title">Einkaufen</div>
-                            <div class="note-importance">
-                                <i class="material-icons importance" value="5">whatshot</i>
-                                <i class="material-icons importance" value="4">whatshot</i>
-                                <i class="material-icons importance" value="3">whatshot</i>
-                                <i class="material-icons importance" value="2">whatshot</i>
-                                <i class="material-icons importance" value="1">whatshot</i>
-                            </div>
-                            <div class="note-finish-checkbox"><label><input type="checkbox" value="">Finished</label>
-                            </div>
-                            <div class="note-text">
-                                <textarea>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l</textarea>
-                            </div>
-                            <div class="note-edit">
-                                <button>Edit</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </main>
+        <header>
+            <div class="create">
+                <a href="#popup" class="button create-button">Create new Note</a>
             </div>
+            <div class="change-style">
+                <select class="change-style-select">
+                    <option value='simple'>Simple</option>
+                    <option value='colorful'>Colorful</option>
+                </select>
+            </div>
+
+        </header>
+
+        <main>
+            <nav>
+                <div class="nav-list">
+                    <button class="nav-button">By finish Date</button>
+                    <button class="nav-button">By finish Date</button>
+                    <button class="nav-button">By finish Date</button>
+                </div>
+                <div class="show-finished">
+                    <button>Show finished</button>
+                </div>
+            </nav>
+            <section>
+                <div class="notes"></div>
+            </section>
+        </main>
+    </div>
+    <div id="popup" class="popup--overlay">
+        <div class="popup--wrapper">
+            <h2>test</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="popup--content">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/handlebars-v4.0.11.js"></script>
+    <script  type="module" src="js/data.js"></script>
+    <script type="module" src="js/model.js" ></script>
+    <script type="module" src="js/app.js"></script>
+
+    <script id="note-template" type="text/x-handlebars-template">
+        {{#each note}}
+        <div class="note" value="{{id}}">
+            <div class="note-date">{{title}}</div>
+            <div class="note-title">{{title}}</div>
+            <div class="note-importance">
+                {{#times importance}}
+                <i class="material-icons importance">whatshot</i>
+                {{/times}}
+            </div>
+            <div class="note-finish-checkbox"><label><input type="checkbox" value="">Finished</label>
+            </div>
+            <div class="note-text">
+                <p>{{description}}</p>
+            </div>
+            <div class="note-edit">
+                <a class="button " href="#popup">Edit</a>
+            </div>
+        </div>
+        {{/each}}
     </script>
     <script id="edit-note-template" type="text/x-handlebars-template">
 
-    <div class="edit-note-container">
-        <div class="edit-note flex">
-            <div class="label flex">{{title}}</div>
-            <div class="edit-note-title input flex">
-                <input type="text">
+        <div class="edit-note-container">
+            <div class="edit-note flex">
+                <div class="label flex">Titel</div>
+                <div class="edit-note-title input flex">
+                    <input type="text">
+                </div>
+            </div>
+            <div class="edit-note flex">
+                <div class="label">Beschreibung</div>
+                <div class="edit-note-description input flex">
+                    <textarea></textarea>
+                </div>
+            </div>
+            <div class="edit-note flex">
+                <div class="label">Wichtigkeit</div>
+                <div class="edit-note-importance input flex">
+                    <ul>
+                        <li class="material-icons importance" value="5">whatshot</li>
+                        <li class="material-icons importance" value="4">whatshot</li>
+                        <li class="material-icons importance" value="3">whatshot</li>
+                        <li class="material-icons importance" value="2">whatshot</li>
+                        <li class="material-icons importance" value="1">whatshot</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="edit-note flex">
+                <div class="label">Erledigt bis</div>
+                <div class="edit-note-date input flex">
+                    <input type="date">
+                </div>
+            </div>
+            <div class="edit-note flex">
+                <a class="button button-save" href="#">Speichern</a>
+                <a class="button button-cancel" href="#">Abbrechen</a>
             </div>
         </div>
-        <div class="edit-note flex">
-            <div class="label">Beschreibung</div>
-            <div class="edit-note-description input flex">
-                <textarea></textarea>
-            </div>
-        </div>
-        <div class="edit-note flex">
-            <div class="label">Wichtigkeit</div>
-            <div class="edit-note-importance input flex">
-                <ul>
-                    <li class="material-icons importance" value="5">whatshot</li>
-                    <li class="material-icons importance" value="4">whatshot</li>
-                    <li class="material-icons importance" value="3">whatshot</li>
-                    <li class="material-icons importance" value="2">whatshot</li>
-                    <li class="material-icons importance" value="1">whatshot</li>
-                </ul>
-            </div>
-        </div>
-        <div class="edit-note flex">
-            <div class="label">Erledigt bis</div>
-            <div class="edit-note-date input flex">
-                <input type="date">
-            </div>
-        </div>
-        <div class="edit-note flex">
-            <button class="button-save">Speichern</button>
-            <button class="button-cancel">Abbrechen</button>
-        </div>
-    </div>
     </script>
-            <script src="js/data.js"></script>
-            <script src="js/main.js"></script>
+
+
 </body>
 
 </html>
