@@ -29,6 +29,9 @@ import {default as model} from './model.js';
     }
 
     function showEditTemplate(note) {
+        if ( note ){
+            note.edit = true;
+        }
         $('.popup--content').html(noteEditTemplate(note));
     }
 
@@ -82,11 +85,23 @@ import {default as model} from './model.js';
             showEditTemplate(note);
         }
 
+        function updateNote(e) {
+            noteService.updateNote(
+                $(e.target).val(),
+                $('.edit-note-title input').val(),
+                $('.edit-note-description textarea').val(),
+                $('.importance.checked').length,
+                $('.edit-note-date input').val()
+            );
+            updateUI();
+        }
+
         $(document).on('change', '.change-style-select', changeStyle);
         $(document).on('click', '.create-button', createButtonClick);
         $(document).on('click', '.edit-note-importance li', editImportance);
         $(document).on('click', '.button-save', saveNote);
         $(document).on('click', '.note-edit button', editNote);
+        $(document).on('click', '.button-update', updateNote);
 
         updateUI();
     });

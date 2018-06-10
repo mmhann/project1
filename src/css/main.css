@@ -215,9 +215,6 @@ select:hover{
     color: white;
 }
 
-.button-save, .button-cancel {
-    width: 50%;
-}
 
 .button-save {
     border-radius: 5px 0 0 5px;
@@ -255,7 +252,13 @@ select:hover{
     color:black;
 }
 
+.edit-note.button-group a {
+    width: 50%;
+}
 
+.button-update {
+    width: 100%;
+}
 
 /**
 popup CSS

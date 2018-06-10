@@ -91,7 +91,19 @@ class NoteService {
             }
         }
     }
-    
+
+    updateNote(id, title, description, importance, date) {
+        for (let i of this.note) {
+            if ( i.id == id ){
+                i.title = title || 'unknwon';
+                i.description = description ||'';
+                i.importance = importance ;
+                i.date = date;
+            }
+        }
+        this.save();
+    }
+
     findByName(name) {
         return this.note.findByName(name);
     }
