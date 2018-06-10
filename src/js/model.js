@@ -39,7 +39,6 @@ class ColorScheme {
 class ColorSchemeService {
     constructor() {
         let colorSchemeFromStorage = storage.getColorScheme();
-        console.log('colorSchemeFromStorage', colorSchemeFromStorage);
 
         if (colorSchemeFromStorage.length === 0) {
             this.colorScheme = [ ];
@@ -47,9 +46,6 @@ class ColorSchemeService {
             this.save();
         }
         else {
-            console.log('colorSchemeFromStorage', colorSchemeFromStorage);
-            
-
             this.colorScheme = colorSchemeFromStorage;
         }
     }
@@ -88,6 +84,14 @@ class NoteService {
         this.save();
     }
 
+    editNote(id) {
+        for (let i of this.note) {
+            if ( i.id == id ){
+                return i;
+            }
+        }
+    }
+    
     findByName(name) {
         return this.note.findByName(name);
     }
