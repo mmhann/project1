@@ -225,9 +225,6 @@ select:hover{
     border-radius: 0 5px 5px 0;
 }
 
-
-
-
 .edit-note-importance ul {
     unicode-bidi: bidi-override;
     direction: rtl;

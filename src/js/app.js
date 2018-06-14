@@ -95,6 +95,11 @@ import {default as model} from './model.js';
             );
             updateUI();
         }
+        
+        function orderByImportance(){
+            noteService.orderByImportanceNote();
+            updateUI();
+        }
 
         $(document).on('change', '.change-style-select', changeStyle);
         $(document).on('click', '.create-button', createButtonClick);
@@ -102,6 +107,7 @@ import {default as model} from './model.js';
         $(document).on('click', '.button-save', saveNote);
         $(document).on('click', '.note-edit button', editNote);
         $(document).on('click', '.button-update', updateNote);
+        $(document).on('click', '.nav--button--importance', orderByImportance);
 
         updateUI();
     });

@@ -4,27 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "lint": "eslint"
+    "start": "node -r esm index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mmhann/project1.git"
   },
-  "author": "",
+  "author": "MM",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mmhann/project1/issues"
   },
   "homepage": "https://github.com/mmhann/project1#readme",
   "dependencies": {
-    "eslint-config-airbnb": "^16.1.0",
+    "body-parser": "^1.18.3",
+    "esm": "^3.0.49",
+    "express": "^4.16.3",
     "handlebars": "^4.0.11",
+    "nedb": "^1.8.0",
+    "nedb-promise": "^2.0.1",
     "serve": "^6.5.7"
-  },
-  "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.12.0"
   }
 }

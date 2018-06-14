@@ -1,5 +1,30 @@
 import {default as storage} from './data.js';
 
+
+function compareValues(key, order='asc') {
+    return function(a, b) {
+        if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+            return 0;
+        }
+
+        const varA = (typeof a[key] === 'string') ?
+            a[key].toUpperCase() : a[key];
+        const varB = (typeof b[key] === 'string') ?
+            b[key].toUpperCase() : b[key];
+
+        let comparison = 0;
+        if (varA > varB) {
+            comparison = 1;
+        } else if (varA < varB) {
+            comparison = -1;
+        }
+        return (
+            (order == 'desc') ? (comparison * -1) : comparison
+        );
+    };
+}
+
+
 class Note {
     constructor(id, title, description, importance, date) {
         this.id = id;
@@ -104,6 +129,10 @@ class NoteService {
         this.save();
     }
 
+    orderByImportanceNote() {
+        this.note.sort(compareValues('importance', 'desc'));
+    }
+
     findByName(name) {
         return this.note.findByName(name);
     }
@@ -112,20 +141,6 @@ class NoteService {
         storage.persist('note', this.note.map(f => f.toJSON()));
     }
 
-    orderNoteById(foodId, callback) {
-        let toOrder = this.food[foodId];
-        if (toOrder) {
-            setTimeout(
-                () => {
-                    toOrder.amount += toOrder.amountPerDelivery;
-                    this.save();
-
-                    if (typeof(callback) === 'function') {
-                        callback();
-                    }
-                }, 2000);
-        }
-    }
 }
 
 
