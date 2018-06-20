@@ -5,23 +5,31 @@
     --main-btn-color: #555555;
 }
 
-*{
-    font-size:16px;
+* {
+    font-size: 16px;
     font-family: 'Roboto', sans-serif;
     margin: 0;
 }
 
+.nav-list {
+    grid-area: nav-list;
+}
 
-.create { grid-area: create; }
-.change-style { grid-area: change-style; }
-.nav-list { grid-area: nav-list; }
-.show-finished { grid-area: show-finished; }
+.show-finished {
+    grid-area: show-finished;
+}
 
+.note-text {
+    grid-area: note-text;
+}
 
-.note-text { grid-area: note-text; }
-.label { grid-area: label; }
-.input { grid-area: input;}
+.label {
+    grid-area: label;
+}
 
+.input {
+    grid-area: input;
+}
 
 header {
     grid-area: header;
@@ -29,12 +37,14 @@ header {
     background-color: var(--main-bg-color);
     padding: 10px;
     margin-bottom: 10px;
+    justify-content: space-between;
 }
 
 nav {
-    display:flex;
+    display: flex;
     background-color: var(--main-bg-color);
     padding: 10px;
+    justify-content: space-between;
 }
 
 main {
@@ -48,25 +58,21 @@ section {
 }
 
 .flex {
-    display:flex;
+    display: flex;
 }
 
 .grid-container {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-    'header'
-    'main';
+    grid-template-areas: 'header' 'main';
 }
 
 .note {
-    display:grid;
+    display: grid;
     grid-template-columns: 1fr 2fr 2fr 1fr;
     grid-template-rows: auto 1fr;
-    grid-template-areas:
-    'note-date note-title note-importance note-edit'
-    'note-finish-checkbox note-text note-text note-edit';
-    padding:15px 15px 23px;
+    grid-template-areas: 'note-date note-title note-importance note-edit' 'note-finish-checkbox note-text note-text note-edit';
+    padding: 15px 15px 23px;
     margin-bottom: 20px;
     background-color: var(--main-bg-color);
     grid-row-gap: 10px;
@@ -96,7 +102,7 @@ section {
     max-width: 960px;
     margin: 20px auto 0;
     background-color: var(--main-bg-color);
-    padding: 20px ;
+    padding: 20px;
 }
 
 .edit-note-container > div:last-child {
@@ -116,38 +122,29 @@ section {
     width: 70%;
 }
 
-
-
-.change-style,
-.show-finished {
-    display:flex;
-    flex-grow: 1;
-    justify-content: right;
-}
-
-.show-finished button {
+.nav--button--finished,
+.nav--button--toggleFinished {
     padding: 10px 35px;
     align-self: flex-end;
 }
 
-.create,
 .nav-list {
-    display:flex;
+    display: flex;
     flex-grow: 5;
     justify-content: left;
 }
 
 .nav-list button {
-    margin-left:0;
+    margin-left: 0;
     margin-right: 0;
-    border-right:0;
+    border-right: 0;
     border-radius: 0px;
     padding: 10px 35px;
     align-self: flex-end;
 }
 
 .nav-list button:last-child {
-    border-right:2px solid var(--main-btn-color);
+    border-right: 2px solid var(--main-btn-color);
     border-radius: 0 5px 5px 0;
 }
 
@@ -172,7 +169,7 @@ section {
 }
 
 .importance.checked {
-    color:#434343;
+    color: #434343;
 }
 
 button,
@@ -187,15 +184,15 @@ input {
     text-decoration: none;
     display: inline-block;
     transition-duration: 0.4s;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
 button,
 .button,
 select {
-cursor: pointer;
-padding: 16px 32px;
-text-align: center;
+    cursor: pointer;
+    padding: 16px 32px;
+    text-align: center;
 
 }
 
@@ -210,13 +207,12 @@ textarea, input {
 
 button:hover,
 .button:hover,
-select:hover{
+select:hover {
     background-color: var(--main-btn-color);
     color: white;
 }
 
-
-.button-save {
+.button-save, .button-update {
     border-radius: 5px 0 0 5px;
     border-right: none;
 }
@@ -229,85 +225,119 @@ select:hover{
     unicode-bidi: bidi-override;
     direction: rtl;
 }
+
 .edit-note-importance ul > li {
     display: inline-block;
     position: relative;
     width: 1.1em;
 }
 
-.edit-note-importance ul > li:hover{
-    color:white;
+.edit-note-importance ul > li:hover {
+    color: white;
 }
+
 .edit-note-importance ul > li:hover:before,
 .edit-note-importance ul > li:hover ~ li:before {
     content: "whatshot";
     position: absolute;
-    color:red;
+    color: red;
 }
 
 .edit-note-importance ul > li.checked {
-    color:black;
+    color: black;
 }
 
-.edit-note.button-group a {
+.edit-note.button-group button {
     width: 50%;
-}
-
-.button-update {
-    width: 100%;
 }
 
 /**
 popup CSS
  */
 
+/*.popup--overlay {*/
+/*position: fixed;*/
+/*top: 0;*/
+/*bottom: 0;*/
+/*left: 0;*/
+/*right: 0;*/
+/*background: rgba(0, 0, 0, 0.7);*/
+/*transition: opacity 500ms;*/
+/*visibility: hidden;*/
+/*opacity: 0;*/
+/*}*/
+/*.popup--overlay:target {*/
+/*visibility: visible;*/
+/*opacity: 1;*/
+/*}*/
 
+/*.popup--wrapper {*/
+/*margin: 70px auto;*/
+/*padding: 20px;*/
+/*background: #fff;*/
+/*border-radius: 5px;*/
+/*width: 30%;*/
+/*position: relative;*/
+/*transition: all 5s ease-in-out;*/
+/*}*/
 
-.popup--overlay {
-    position: fixed;
-    top: 0;
-    bottom: 0;
+/*.popup--wrapper h2 {*/
+/*margin-top: 0;*/
+/*color: #333;*/
+/*font-family: Tahoma, Arial, sans-serif;*/
+/*}*/
+/*.popup--wrapper .close {*/
+/*position: absolute;*/
+/*top: 20px;*/
+/*right: 30px;*/
+/*transition: all 200ms;*/
+/*font-size: 30px;*/
+/*font-weight: bold;*/
+/*text-decoration: none;*/
+/*color: #333;*/
+/*}*/
+/*.popup--wrapper .close:hover {*/
+/*color: #06D85F;*/
+/*}*/
+/*.popup--content {*/
+/*max-height: 30%;*/
+/*overflow: auto;*/
+/*}*/
+
+/* The Modal (background) */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
     left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
-}
-.popup--overlay:target {
-    visibility: visible;
-    opacity: 1;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-.popup--wrapper {
-    margin: 70px auto;
+/* Modal Content/Box */
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    width: 30%;
-    position: relative;
-    transition: all 5s ease-in-out;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
 }
 
-.popup--wrapper h2 {
-    margin-top: 0;
-    color: #333;
-    font-family: Tahoma, Arial, sans-serif;
-}
-.popup--wrapper .close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    transition: all 200ms;
-    font-size: 30px;
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
     font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
     text-decoration: none;
-    color: #333;
-}
-.popup--wrapper .close:hover {
-    color: #06D85F;
-}
-.popup--content {
-    max-height: 30%;
-    overflow: auto;
+    cursor: pointer;
 }
