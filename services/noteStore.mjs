@@ -84,8 +84,8 @@
 //
 //     }
 //
-//     addNote(title, description, importance, experationDate) {
-//         this.note.push(new Note($('.note').length + 1, title, description, importance, experationDate, Date.parse(new Date()), 0));
+//     addNote(title, description, importance, expirationDate) {
+//         this.note.push(new Note($('.note').length + 1, title, description, importance, expirationDate, Date.parse(new Date()), 0));
 //         this.save();
 //     }
 //
@@ -97,13 +97,13 @@
 //         }
 //     }
 //
-//     updateNote(id, title, description, importance, experationDate) {
+//     updateNote(id, title, description, importance, expirationDate) {
 //         for (let i of this.note) {
 //             if ( i.id == id ){
 //                 i.title = title || 'unknwon';
 //                 i.description = description ||'';
 //                 i.importance = importance ;
-//                 i.experationDate = experationDate;
+//                 i.expirationDate = expirationDate;
 //             }
 //         }
 //         this.save();
@@ -163,11 +163,11 @@
 import Datastore from 'nedb-promise'
 
 export class Note {
-    constructor(title, description, importance, experationDate) {
+    constructor(title, description, importance, expirationDate) {
         this.title          = title || 'unknwon';
         this.description    = description || '';
         this.importance     = importance;
-        this.experationDate = experationDate;
+        this.expirationDate = expirationDate;
         this.creationDate   = new Date();
         this.finished       = 0;
     }
@@ -178,7 +178,7 @@ export class Note {
     //         title: this.title,
     //         description: this.description,
     //         importance: this.importance,
-    //         experationDate:Date.parse(this.experationDate),
+    //         expirationDate:Date.parse(this.expirationDate),
     //         creationDate:this.creationDate,
     //         finished: this.finished
     //     };
@@ -188,7 +188,7 @@ export class Note {
     //         id, obj.title,
     //         obj.description,
     //         obj.importance,
-    //         new Date(obj.experationDate).toISOString().substring(0, 10),
+    //         new Date(obj.expirationDate).toISOString().substring(0, 10),
     //         obj.creationDate,
     //         obj.finished
     //     );
@@ -200,18 +200,18 @@ export class NoteStore {
         this.db = db || new Datastore({filename: './data/notes.db', autoload: true});
     }
 
-    async add(title, description, importance, experationDate) {
-        let note = new Note(title, description, importance, experationDate);
+    async add(title, description, importance, expirationDate) {
+        let note = new Note(title, description, importance, expirationDate);
         return await this.db.insert(note);
     }
 
-    async update(id, title, description, importance, experationDate) {
+    async update(id, title, description, importance, expirationDate) {
         await this.db.update({_id: id}, {
             $set: {
                 "title"         : title,
                 'description'   : description,
                 'importance'    : importance,
-                'experationDate': experationDate
+                'expirationDate': expirationDate
             }
         });
         return await this.get(id);

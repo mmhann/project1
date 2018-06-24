@@ -1,54 +1,16 @@
-/**
- * Food Storage
- */
-let storage = readFromLocalStorage('note');
-let colorScheme = readFromLocalStorage('colorScheme');
-
-writeToLocalStorage('note', storage);
-
-function getAllNotes() {
-    let note = [];
-    for (let i of storage) {
-        if ( i.finished === 0 ){
-            note.push(i);
+;(function(services) {
+    function setItem(name, value) {
+        if (value) {
+            localStorage.setItem(name, value);
+        }
+        else {
+            localStorage.removeItem(name);
         }
     }
-    return note;
-}
 
-function getAllFinishedNotes() {
-    let note = [];
-    for (let i of storage) {
-        if ( i.finished === 1 ){
-            note.push(i);
-        }
+    function getItem(name) {
+        return localStorage.getItem(name) || null;
     }
-    return note;
-}
 
-function getColorScheme() {
-    return colorScheme;
-}
-
-function persist(name, toPersist) {
-    storage = toPersist;
-    writeToLocalStorage(name, storage);
-}
-
-function readFromLocalStorage(name) {
-    // return JSON.parse(localStorage.getItem(name) || '[ ]');
-}
-
-function writeToLocalStorage(name, toPersist) {
-    // localStorage.setItem(name, JSON.stringify(toPersist));
-}
-
-/**
- * Exposed API facilities.
- */
-// export default { getAllNotes, getAllFinishedNotes, persist, getColorScheme};
-export class ValueStorage {
-
-}
-
-export const valueStorage = new ValueStorage();
+    services.valueStorage = {getItem, setItem};
+}(window.services = window.services || {}));

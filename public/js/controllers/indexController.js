@@ -1,20 +1,15 @@
-// import {default as model} from '../../../services/model.js';
-
 ;(function($) {
-    // const noteService        = new model.NoteService();
-    // const colorSchemeService = new model.ColorSchemeService();
+    moment.locale('de');
 
-    const client = window.services.restClient;
+    const client       = window.services.restClient;
+    const valueStorage = window.services.valueStorage;
+    const colorScheme  = 'colorScheme';
 
     let noteTemplate      = null;
     let noteEditTemplate  = null;
     let importanceOrder   = false;
     let finishDateOrder   = false;
     let creationDateOrder = false;
-
-    // function showNotes() {
-    //     // $('.notes').html(noteTemplate({note: noteService.note}));
-    // }
 
     function showEditTemplate(note) {
         if (note) {
@@ -23,14 +18,18 @@
         $('.popup-content').html(noteEditTemplate(note));
     }
 
-    function setColorScheme() {
-        // $('.change-style-select').val(colorSchemeService.colorScheme[0].value);
-        // $('body').addClass(colorSchemeService.colorScheme[0].value);
-    }
+    function getColorScheme() {
+        let $body                  = $('body'),
+            colorSchemeFromStorage = valueStorage.getItem(colorScheme);
 
-    function updateUI() {
-        // showNotes();
-        // setColorScheme();
+        if (colorSchemeFromStorage) {
+            $body.removeClass();
+            $body.addClass(colorSchemeFromStorage);
+            $('.change-style-select').val(colorSchemeFromStorage);
+        }
+        else {
+            $body.addClass('simple');
+        }
     }
 
     $(function() {
@@ -41,13 +40,13 @@
             showEditTemplate();
         }
 
-        function changeStyle(e) {
+        function changeColorScheme(e) {
             let targetValue = $(e.target).val(),
                 $body       = $('body');
 
             $body.removeClass();
             $body.addClass(targetValue);
-            colorSchemeService.addColorScheme(targetValue);
+            valueStorage.setItem(colorScheme, targetValue);
         }
 
         function editImportance(e) {
@@ -113,7 +112,7 @@
 
         function orderByFinishDate() {
             finishDateOrder = !finishDateOrder;
-            orderNotes('experationDate', finishDateOrder ? 'asc' : 'desc');
+            orderNotes('expirationDate', finishDateOrder ? 'asc' : 'desc');
         }
 
         function orderByCreationDate() {
@@ -125,6 +124,7 @@
             client.getNotes().done(function(notes) {
                 notes.sort(sortingValues(key, order));
                 $('.notes').html(noteTemplate({notes: notes}));
+                $('.nav--button--toggleFinished').removeClass('nav--button--toggleFinished').addClass('nav--button--finished').html('Show finished notes');
             })
         }
 
@@ -141,9 +141,6 @@
         }
 
         function toggleFinishedNotes(e) {
-
-            console.log('$(e.target).hasClass(nav--button--finished)', $(e.target).hasClass('nav--button--finished'));
-
             if ($(e.target).hasClass('nav--button--finished')) {
                 $(e.target).removeClass('nav--button--finished').addClass('nav--button--toggleFinished').html('Show current notes');
                 renderFinishedNotes();
@@ -153,8 +150,7 @@
             }
         }
 
-        $(document).on('change', '.change-style-select', changeStyle);
-
+        $(document).on('change', '.change-style-select', changeColorScheme);
         $(document).on('click', '.nav--button--importance', orderByImportance);
         $(document).on('click', '.nav--button--finish', orderByFinishDate);
         $(document).on('click', '.nav--button--created', orderByCreationDate);
@@ -167,8 +163,8 @@
         $(document).on('click', '.button-update', updateNote);
         $(document).on('click', '.edit-note-importance li', editImportance);
 
-        // updateUI();
         renderNotes();
+        getColorScheme();
     });
 
 })(jQuery);

@@ -1,23 +1,22 @@
 ;(function(services, $) {
-
     const ajaxUtil = window.util.ajax;
 
-    function createNote(title, description, importance, experationDate) {
+    function createNote(title, description, importance, expirationDate) {
         return ajaxUtil.ajax("POST", "/notes/", {
             title         : title,
             description   : description,
             importance    : importance,
-            experationDate: experationDate
+            expirationDate: expirationDate
         });
     }
 
-    function updateNote(id, title, description, importance, experationDate) {
+    function updateNote(id, title, description, importance, expirationDate) {
         return ajaxUtil.ajax("POST", `notes/${id}`, {
             id            : id,
             title         : title,
             description   : description,
             importance    : importance,
-            experationDate: experationDate
+            expirationDate: expirationDate
         });
     }
 

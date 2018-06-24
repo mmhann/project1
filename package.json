@@ -22,6 +22,7 @@
     "esm": "^3.0.49",
     "express": "^4.16.3",
     "handlebars": "^4.0.11",
+    "moment": "^2.22.2",
     "nedb": "^1.8.0",
     "nedb-promise": "^2.0.1",
     "serve": "^6.5.7"

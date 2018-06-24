@@ -5,6 +5,7 @@
     <title>Project 1</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="shortcut icon" href="../images/favicon.ico" />
 
 </head>
 
@@ -15,7 +16,7 @@
             <a class="button create-button open--popup">Create new Note</a>
             <select class="change-style-select">
                 <option value='simple'>Simple</option>
-                <option value='colorful'>Colorful</option>
+                <option value='pastel'>Pastel</option>
             </select>
         </header>
 
@@ -43,17 +44,17 @@
     <script id="note-template" type="text/x-handlebars-template">
         {{#each notes}}
         <div class="note" value="{{_id}}">
-            <div class="note-date">{{experationDate}}</div>
+            <div class="note-date">{{#formatDate expirationDate}}{{/formatDate}}</div>
             <div class="note-title">{{title}}</div>
             <div class="note-importance">
                 {{#times importance}}
-                <i class="material-icons importance">whatshot</i>
+                <i class="material-icons importance">flash_on</i>
                 {{/times}}
             </div>
             {{#if finished}}
-            <div class="note-finish-checkbox"><label><input type="checkbox" value="" checked>Finished</label>
+            <div class="note-finish-checkbox"><label>Finished<input type="checkbox" value="" checked="checked"><span class="checkmark"></span></label>
                 {{else}}
-                <div class="note-finish-checkbox"><label><input type="checkbox" value="">Finished</label>
+                <div class="note-finish-checkbox"><label>Finished<input type="checkbox" value=""><span class="checkmark"></span></label>
                     {{/if}}
                 </div>
                 <div class="note-text">
@@ -69,19 +70,19 @@
         <span class="close">&times;</span>
         <div class="edit-note-container">
             <div class="edit-note flex">
-                <div class="label flex">Titel</div>
+                <div class="label flex">Title</div>
                 <div class="edit-note-title input flex">
                     <input type="text" value="{{title}}">
                 </div>
             </div>
             <div class="edit-note flex">
-                <div class="label">Beschreibung</div>
+                <div class="label">Description</div>
                 <div class="edit-note-description input flex">
                     <textarea>{{description}}</textarea>
                 </div>
             </div>
             <div class="edit-note flex">
-                <div class="label">Wichtigkeit</div>
+                <div class="label">Importance</div>
                 <div class="edit-note-importance input flex">
                     <ul>
                         {{#importance importance}}{{/importance}}
@@ -89,30 +90,32 @@
                 </div>
             </div>
             <div class="edit-note flex">
-                <div class="label">Erledigt bis</div>
+                <div class="label">Done until</div>
                 <div class="edit-note-date input flex">
-                    <input type="date" value="{{experationDate}}">
+                    <input type="date" value="{{expirationDate}}">
                 </div>
             </div>
             <div class="edit-note flex button-group">
+                <button class="button-cancel">Cancel</button>
                 {{#if edit}}
-                    <button class="button-update" value="{{_id}}">Speichern</button>
+                    <button class="button-update" value="{{_id}}">Save</button>
                 {{else}}
-                    <button class="button-save">Speichern</button>
+                    <button class="button-save">Save</button>
                 {{/if}}
-                    <button class="button-cancel">Abbrechen</button>
+
             </div>
         </div>
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../js/utils/ajaxUtil.js"></script>
-    <script src="../js/services/restClient.js"></script>
-    <script src="../js/controllers/indexController.js"></script>
-
     <script src="../js/libs/handlebars-v4.0.11.js"></script>
+    <script src="../js/libs/moment.js"></script>
+    <script src="../js/utils/ajaxUtil.js"></script>
     <script src="../js/utils/handlebarsHelpers.js"></script>
     <script src="../js/utils/popup.js"></script>
     <script src="../js/utils/sort.js"></script>
+    <script src="../js/services/valueStorage.js"></script>
+    <script src="../js/services/restClient.js"></script>
+    <script src="../js/controllers/indexController.js"></script>
 </body>
 
 </html>
